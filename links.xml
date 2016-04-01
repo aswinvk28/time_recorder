@@ -1,0 +1,9 @@
+<pages>
+    <page href="https://en.wikipedia.org/wiki/Main_Page" />
+    <page href="http://www.iana.org/" />
+    <page href="http://www.w3c.org" />
+    <page href="https://example.com/" />
+    <page href="http://www.iana.org/domains/idn-tables" />
+    <page href="http://www.iana.org/time-zones" />
+    <page href="http://www.iana.org/protocols" />
+</pages>
