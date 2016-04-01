@@ -18,7 +18,7 @@ class PageExecutionTime {
      * Array of cURL Handles
      * @var array
      */
-    private $curlHandles;
+    private $curlHandles = array();
     
     private $file;
     
@@ -34,7 +34,9 @@ class PageExecutionTime {
      */
     public function log(EventLog $log)
     {
-        
+        foreach($this->total as $link => $total) {
+            $log->write("\n" . $link . ": " . $total);
+        }
     }
     
     /**
@@ -43,7 +45,7 @@ class PageExecutionTime {
      */
     public function total()
     {
-        
+        return $this->total;
     }
     
     /**
@@ -91,13 +93,15 @@ class PageExecutionTime {
             }
         } elseif(!empty($url)) {
             $curlHandle = curl_init($url);
+            array_push($this->curlHandles, $curlHandle);
             $this->curlGet($curlHandle);
             $this->total[$link] = curl_getinfo($curlHandle, CURLINFO_TOTAL_TIME);
         }
+        $this->close($curlHandle);
         return $this;
     }
     
-    public function close()
+    public function close($ch = '')
     {
         if(!empty($this->curlHandles)) {
             for($index = 0; $index < count($this->curlHandles); $index++) {
