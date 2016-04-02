@@ -6,6 +6,8 @@
  * and open the template in the editor.
  */
 
+define('TIMER_ROOT', dirname(__FILE__));
+
 require_once TIMER_ROOT . '/page_time_execution.php';
 
 class TimeRecorder {
@@ -31,7 +33,7 @@ class TimeRecorder {
     
     public static function timer($name = '')
     {
-        return new static($name);
+        return new self($name);
     }
     
     public static function pageTimer($file = '')
