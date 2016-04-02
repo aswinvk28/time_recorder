@@ -27,7 +27,4 @@ Define Named Timers as well as HTTP Page Execution Times
     --------------
     This class can be included within any framework and is compatible with PHP version 5.*
     The XML format for the page links are to be specified as defined in links.xml file and there are no dependencies for this plugin.
-
-*By,*     
-*Aswin Vijayakumar*
     
