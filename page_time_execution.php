@@ -97,7 +97,7 @@ class PageExecutionTime {
             $this->curlGet($curlHandle);
             $this->total[$link] = curl_getinfo($curlHandle, CURLINFO_TOTAL_TIME);
         }
-        $this->close($curlHandle);
+        $this->close();
         return $this;
     }
     
@@ -114,13 +114,14 @@ class PageExecutionTime {
     
     public function parse()
     {
-        $xmlElement = simplexml_load_string(stream_get_contents($this->file));
-        $attributes = array();
-        if(!empty($xmlElement->pages->page)) {
-            foreach($xmlElement->pages->page as $page) {
-                $pageAttributes = $page->attributes();
-                array_push($attributes, $pageAttributes['href']);
+        try {
+            $xmlElement = simplexml_load_string(stream_get_contents($this->file));
+            $attributes = array();
+            for($index = 0; $index < $xmlElement->children()->count(); $index++) {
+                array_push($attributes, (string) $xmlElement->page[$index]['href']);
             }
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage(), __FILE__ . " Line: " . __LINE__);
         }
         return $attributes;
     }

@@ -22,7 +22,7 @@ class TimeRecorder {
      */
     private $state;
     
-    private $recordStore = array();
+    private static $recordStore = array();
     
     public function __construct($name = '')
     {
@@ -43,28 +43,31 @@ class TimeRecorder {
     {
         if($this->state == "Ended") {
             $log->write("\n" . $this->name . " Ended: " . 
-                    ($this->recordStore[$this->name]['end'] - $this->recordStore[$this->name]['start']) . " microseconds");
+                    (self::$recordStore[$this->name]['end'] - self::$recordStore[$this->name]['start']) . " seconds");
         } elseif($this->state == "Started") {
             $log->write("\n" . $this->name . " Started");
         }
+        return $this;
     }
     
     public function start()
     {
         $this->state = "Started";
-        $this->recordStore[$this->name] = array('start' => microtime());
+        self::$recordStore[$this->name] = array('start' => microtime(true));
+        return $this;
     }
     
     public function end()
     {
         $this->state = "Ended";
-        $this->recordStore[$this->name]['end'] = microtime();
+        self::$recordStore[$this->name]['end'] = microtime(true);
+        return $this;
     }
     
-    public function total()
+    public static function total(EventLog $log)
     {
-        foreach($this->recordStore as $name => $info) {
-            $log->write("\n" . $name . " Ended: " . ($info['end'] - $info['start']) . " microseconds");
+        foreach(self::$recordStore as $name => $info) {
+            $log->write("\n" . $name . " Ended: " . ($info['end'] - $info['start']) . " seconds");
         }
     }
 }
