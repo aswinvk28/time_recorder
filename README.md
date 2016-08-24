@@ -2,7 +2,7 @@
 
 Time Recorder is a PHP Component that can be included within a library or your framework. It records the execution times for a block of code, intended for observing the performance of a block of code.
 
-The execution times are recorded by a developer using Named Timers so that the named timer reveals the time in (microseconds). The execution times for a set of HTTP Idenitfiers can also be calculated in (milliseconds). The definitions for the HTTP identifiers are written using REST URIs in a structured XML format which are available at ![https://github.com/aswinvk28/time_recorder/blob/master/links.xml][1]
+The execution times are recorded by a developer using Named Timers so that the named timer reveals the time in (microseconds). The execution times for a set of HTTP Idenitfiers can also be calculated in (milliseconds). The definitions for the HTTP identifiers are written using REST URIs in a structured XML format which are available at [https://github.com/aswinvk28/time_recorder/blob/master/links.xml][1]
 
 #Implementation
 Define Named Timers as well as HTTP Page Execution Times    
